@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react'
 import type { Todo } from '../types/Todo'
+import type { UseTodos } from '../types/useTodos'
 import { loadTodos, saveTodos } from '../utils/storage'
 
-type useTodos={
-  todos:Todo[]
-  addTodo:(text:string)=>void,
-  toggleTodo:(id:string)=>void,
-  deleteTodo:(id:string)=>void
-}
 
-export const useTodos=():useTodos=>{
+
+export const useTodos=():UseTodos=>{
   const [todos,setTodos]=useState<Todo[]>(()=>loadTodos())
 
   useEffect(()=>{
@@ -17,10 +13,10 @@ export const useTodos=():useTodos=>{
   },[todos])
 
   const addTodo=(text:string)=>{
-    setTodos((prev)=>[...prev,{id:crypto.randomUUID(),title:text,completed:true}])
+    setTodos((prev)=>[...prev,{id:crypto.randomUUID(),title:text,completed:false}])
   }
   const toggleTodo=(id:string)=>{
-    setTodos((prev)=>prev.map(todo=>todo.id == id ? {...todo,completed:true} : todo ))
+    setTodos((prev)=>prev.map(todo=>todo.id == id ? {...todo,completed:!todo.completed} : todo ))
   }
   const deleteTodo=(id:string)=>{
     setTodos(prev=>

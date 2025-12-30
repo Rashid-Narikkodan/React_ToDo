@@ -1,12 +1,9 @@
 import { useState } from "react"
 import Button from "./Button"
 import Input from "./Input"
+import type { TodoFromProps } from "../types/TodoFormProps"
 
-type Props={
-    addTodo:(text:string)=>void
-}
-
-const TodoForm = ({addTodo}:Props) => {
+const TodoForm = ({addTodo}:TodoFromProps) => {
     const [value,setValue]=useState('')
     const handleSubmit=(e:React.FormEvent)=>{
         e.preventDefault()
@@ -51,7 +48,7 @@ const TodoForm = ({addTodo}:Props) => {
       disabled:opacity-50
     "
   >
-    ADD
+    <span className="text-2xl">+</span>
   </Button>
 </form>
 

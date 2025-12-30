@@ -1,6 +1,6 @@
 import type { TodoItemProps } from "../types/TodoItemProps"
 import Button from "./Button"
-import CheckBox from "./CheckBox"
+import Toggle from "./Toggle"
 const TodoItem = ({onDelete,onToggle,todo}:TodoItemProps) => {
   const handleDelete=()=>onDelete(todo.id)
   const handleToggle=()=>onToggle(todo.id)
@@ -12,7 +12,7 @@ const TodoItem = ({onDelete,onToggle,todo}:TodoItemProps) => {
   </span>
 
   <div className="flex items-center gap-2 ml-4">
-    <CheckBox
+    <Toggle
       checked={todo.completed}
       onClick={handleToggle}
     />

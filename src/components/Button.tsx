@@ -1,10 +1,12 @@
+import type { ButtonHTMLAttributes } from "react"
+
 type Props={
   children: React.ReactNode
   type?:"button" | "submit" | "reset" | undefined,
-}
-const Button = ({type='button',children}:Props) => {
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>,'type'>
+const Button = ({type='button',children,...rest}:Props) => {
   return (
-    <button type={type} className="bg-gray-600">
+    <button type={type} {...rest}>
       {children}
     </button>
   )

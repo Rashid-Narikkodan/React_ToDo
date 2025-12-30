@@ -2,16 +2,16 @@ import type { Todo } from "../types/Todo";
 
 const KEY = 'todos'
 
-export const loadTodos=():Todo[]|string|void=>{
+export const loadTodos=():Todo[]=>{
   try{
     const todos = localStorage.getItem(KEY)
     if(todos){
       return JSON.parse(todos)
     }else{
-      throw new Error("No items exist in Todo list");
+      return []
     }
-  }catch(error:unknown){
-    if(error instanceof Error) return error.message 
+  }catch{
+    return []
   }
 }
 

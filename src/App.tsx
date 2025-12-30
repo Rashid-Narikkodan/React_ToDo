@@ -4,9 +4,9 @@ import { useTodos } from "./hooks/useTodos"
 function App() {
   const { addTodo, deleteTodo, toggleTodo, todos }=useTodos()
   return (
-    <div>
+    <main className="bg-black min-h-screen flex items-center justify-center">
         <TodoForm addTodo={addTodo}/>
-    </div>
+    </main>
   )
 }
 

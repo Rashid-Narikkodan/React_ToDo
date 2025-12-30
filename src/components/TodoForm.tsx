@@ -48,7 +48,7 @@ const TodoForm = ({addTodo}:TodoFromProps) => {
       disabled:opacity-50
     "
   >
-    <span className="text-2xl">+</span>
+    <span>+</span>
   </Button>
 </form>
 

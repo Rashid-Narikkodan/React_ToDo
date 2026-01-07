@@ -1,26 +1,32 @@
-import { useState } from "react"
-import Button from "./Button"
-import Input from "./Input"
-import type { TodoFromProps } from "../types/TodoFormProps"
+import { useState } from "react";
+import Button from "./Button";
+import Input from "./Input";
+import type { TodoFromProps } from "../types/TodoFormProps";
+import { formValdation } from "../utils/formValidation";
 
-const TodoForm = ({addTodo}:TodoFromProps) => {
-    const [value,setValue]=useState('')
-    const handleSubmit=(e:React.FormEvent)=>{
-        e.preventDefault()
-        if(!value.length) return
-        addTodo(value.trim())
-        setValue('')
+const TodoForm = ({ addTodo }: TodoFromProps) => {
+  const [value, setValue] = useState("");
+  const [error, setError] = useState("");
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const err = formValdation(value.trim());
+    if (err) setError(err);
+    else {
+      addTodo(value.trim());
+      setValue("");
     }
-    return (
-   <form
-  onSubmit={handleSubmit}
-  className="flex items-center gap-3 p-4 bg-zinc-900 rounded-lg border border-zinc-800"
->
-  <Input
-    value={value}
-    onChange={setValue}
-    placeholder="Enter your todo"
-    className="
+  };
+  return (
+    <>
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center gap-3 p-4 bg-zinc-900 rounded-lg border border-zinc-800"
+    >
+      <Input
+        value={value}
+        onChange={setValue}
+        placeholder="Enter your todo"
+        className="
       flex-1
       bg-transparent
       border border-cyan-400
@@ -32,27 +38,28 @@ const TodoForm = ({addTodo}:TodoFromProps) => {
       focus:ring-2
       focus:ring-cyan-500
     "
-  />
+      />
 
-  <Button
-    type="submit"
-    className="
-      px-4 py-2
-      rounded-md
-      bg-cyan-500
-      text-black
-      font-medium
-      hover:bg-cyan-400
-      active:scale-95
-      transition
-      disabled:opacity-50
-    "
-  >
-    <span>+</span>
-  </Button>
-</form>
+      <Button
+        type="submit"
+        className="
+        px-4 py-2
+        rounded-md
+        bg-cyan-500
+        text-black
+        font-medium
+        hover:bg-cyan-400
+        active:scale-95
+        transition
+        disabled:opacity-50
+        "
+      >
+        <span>+</span>
+      </Button>
+    </form>
+    {error && <div className="text-red-500 p-1">{error}</div>}
+        </>
+  );
+};
 
-  )
-}
-
-export default TodoForm
+export default TodoForm;
